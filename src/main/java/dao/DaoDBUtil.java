@@ -6,8 +6,8 @@ import java.util.List;
 import model.Student;
 
 public class DaoDBUtil {
-    boolean rowDeleted;
-    boolean rowUpdated;
+    private boolean rowDeleted;
+    private boolean rowUpdated;
     private static Connection con = null;
     private static PreparedStatement prep = null;
     private static ResultSet rs = null;
@@ -70,9 +70,7 @@ public class DaoDBUtil {
         return rowUpdated;
     }
 
-    public List<Student> selectAllStudents()throws SQLException{
-
-        List<Student> student = new ArrayList<>();
+    public ResultSet selectAllStudents()throws SQLException{
         //establish connection
         try { con = DBConnect.getConnection();
              // Step 2:Create a statement using connection object
@@ -81,23 +79,15 @@ public class DaoDBUtil {
             // Step 3: Execute the query or update query
             rs = prep.executeQuery();
 
-            while (rs.next()){
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                int age = rs.getInt("age");
-                String gender = rs.getString("gender");
-                student.add(new Student(id, name, age, gender));
-            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return rs;
     }
 
 
-    public Student selectStudent(int id)throws SQLException {
-        Student student = null;
+    public ResultSet selectStudent(int id)throws SQLException {
+
         // Step 1: Establishing a Connection
         try  {con = DBConnect.getConnection();
              // Step 2:Create a statement using connection object
@@ -107,18 +97,11 @@ public class DaoDBUtil {
              // Step 3: Execute the query or update query
              rs = prep.executeQuery();
 
-            // Step 4: Process the ResultSet object.
-            while (rs.next()) {
-                String name = rs.getString("name");
-                int age = rs.getInt("age");
-                String gender = rs.getString("gender");
-                student = new Student(id, name, age, gender);
-                System.out.println(student);
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return rs;
     }
 }
 
