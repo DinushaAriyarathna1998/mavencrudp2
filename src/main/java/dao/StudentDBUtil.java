@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnect {
+public class StudentDBUtil {
 
     private static String jdbcURL = "jdbc:mysql://localhost:3306/student";
     private static String jdbcUsername = "root";

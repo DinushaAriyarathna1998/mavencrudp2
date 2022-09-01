@@ -8,18 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import dao.DaoDBUtil;
+
 import model.Student;
-import service.ServiceStudent;
+import service.StudentService;
+import service.StudentServiceint;
 
 
 @WebServlet("/")
 public class Insertcontroller extends HttpServlet {
-    private ServiceStudent serviceStudent;
+    private StudentServiceint studentService;
 
 
     public void init() {
-        serviceStudent = new ServiceStudent();
+
+        studentService = new StudentService();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
@@ -60,7 +62,7 @@ public class Insertcontroller extends HttpServlet {
 
     private void listStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Student> liststudent = serviceStudent.selectallstudentsservice();
+        List<Student> liststudent = studentService.selectallstudentsservice();
         request.setAttribute("liststudent", liststudent);
         RequestDispatcher dispatcher = request.getRequestDispatcher("studentlist.jsp");
         dispatcher.forward(request, response);
@@ -74,7 +76,7 @@ public class Insertcontroller extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Student existingStudent = serviceStudent.selectstudentservice(id);
+        Student existingStudent = studentService.selectstudentservice(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("addnew.jsp");
         request.setAttribute("student", existingStudent);
         dispatcher.forward(request, response);
@@ -87,7 +89,7 @@ public class Insertcontroller extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         String gender = request.getParameter("gender");
         Student newStudent = new Student(name, age, gender);
-        serviceStudent.insertstudentservice(newStudent);
+        studentService.insertstudentservice(newStudent);
         response.sendRedirect("list");
     }
 
@@ -99,14 +101,14 @@ public class Insertcontroller extends HttpServlet {
         String gender = request.getParameter("gender");
 
         Student stud = new Student(id, name, age, gender);
-        serviceStudent.updatestudentservice(stud);
+        studentService.updatestudentservice(stud);
         response.sendRedirect("list");
     }
 
     private void deleteStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        serviceStudent.deletestudentservice(id);
+        studentService.deletestudentservice(id);
         response.sendRedirect("list");
 
     }

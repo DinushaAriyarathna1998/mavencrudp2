@@ -1,6 +1,7 @@
 package service;
 
-import dao.DaoDBUtil;
+import dao.StudentDao;
+import dao.StudentDaoInterface;
 import model.Student;
 
 import java.sql.ResultSet;
@@ -8,16 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceStudent {
+public class StudentService implements StudentServiceint{
 
-    DaoDBUtil daoDBUtil;
-
-
+    private StudentDaoInterface studentDao;
 
     public void insertstudentservice(Student student){
         try {
-            daoDBUtil = new DaoDBUtil();
-            daoDBUtil.insertStudent(student);
+            studentDao = new StudentDao();
+            studentDao.insertStudent(student);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -27,8 +26,8 @@ public class ServiceStudent {
     public boolean updatestudentservice(Student student){
         boolean rawupdated = false;
         try {
-            daoDBUtil = new DaoDBUtil();
-            rawupdated = daoDBUtil.updateStudent(student);
+            studentDao = new StudentDao();
+            rawupdated = studentDao.updateStudent(student);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,8 +37,8 @@ public class ServiceStudent {
     public boolean deletestudentservice(int id){
         boolean rawDeleted = false;
         try {
-            daoDBUtil = new DaoDBUtil();
-            rawDeleted = daoDBUtil.deleteStudent(id);
+            studentDao = new StudentDao();
+            rawDeleted = studentDao.deleteStudent(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,8 +49,8 @@ public class ServiceStudent {
         Student student = null;
         ResultSet resultSet = null;
         try {
-            daoDBUtil = new DaoDBUtil();
-            resultSet = daoDBUtil.selectStudent(id);
+            studentDao = new StudentDao();
+            resultSet = studentDao.selectStudent(id);
 
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
@@ -70,8 +69,8 @@ public class ServiceStudent {
         List<Student> student = new ArrayList<>();
         ResultSet resultSet = null;
         try {
-            daoDBUtil = new DaoDBUtil();
-            resultSet = daoDBUtil.selectAllStudents();
+            studentDao = new StudentDao();
+            resultSet = studentDao.selectAllStudents();
 
             while (resultSet.next()){
                 int id = resultSet.getInt("id");
