@@ -1,8 +1,10 @@
 package dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class StudentDBUtil {
 
@@ -11,7 +13,7 @@ public class StudentDBUtil {
     private static String jdbcPassword = "root";
     private static Connection con;
 
-    protected static Connection getConnection() {
+    public static Connection getConnection() {
 
         try {
             //Establishing a Connection
