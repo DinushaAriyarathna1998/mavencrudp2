@@ -1,6 +1,6 @@
-package dao;
+package StudentPackage.dao;
 
-import model.Student;
+import StudentPackage.model.Student;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

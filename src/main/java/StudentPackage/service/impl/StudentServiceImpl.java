@@ -1,9 +1,9 @@
-package service.impl;
+package StudentPackage.service.impl;
 
-import dao.StudentDao;
-import dao.impl.StudentDaoImpl;
-import model.Student;
-import service.StudentService;
+import StudentPackage.dao.StudentDao;
+import StudentPackage.dao.impl.StudentDaoImpl;
+import StudentPackage.model.Student;
+import StudentPackage.service.StudentService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

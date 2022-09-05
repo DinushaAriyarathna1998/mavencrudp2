@@ -1,4 +1,5 @@
-package control;
+/*
+package StudentPackage.control;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +10,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Student;
-import service.impl.StudentServiceImpl;
-import service.StudentService;
+import StudentPackage.model.Student;
+import StudentPackage.service.impl.StudentServiceImpl;
+import StudentPackage.service.StudentService;
 
 
 @WebServlet("/")
@@ -114,3 +115,4 @@ public class StudentController extends HttpServlet {
     }
 
 }
+*/

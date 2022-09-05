@@ -1,10 +1,10 @@
-package dao.impl;
+package StudentPackage.dao.impl;
 
 import java.sql.*;
 
-import dao.StudentDBUtil;
-import dao.StudentDao;
-import model.Student;
+import StudentPackage.dao.StudentDBUtil;
+import StudentPackage.dao.StudentDao;
+import StudentPackage.model.Student;
 
 public class StudentDaoImpl implements StudentDao {
     private boolean rowDeleted;

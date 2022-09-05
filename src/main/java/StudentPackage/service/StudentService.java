@@ -1,6 +1,6 @@
-package service;
+package StudentPackage.service;
 
-import model.Student;
+import StudentPackage.model.Student;
 
 import java.util.List;
 
