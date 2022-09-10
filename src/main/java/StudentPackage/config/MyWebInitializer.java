@@ -1,3 +1,6 @@
+package StudentPackage.config;
+
+import StudentPackage.config.MVCConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -5,12 +8,12 @@ public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[0];
+        return new Class[] {StudentConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {StudentConfig.class};
+        return new Class[] {MVCConfig.class};
     }
 
     @Override

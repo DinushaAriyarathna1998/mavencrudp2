@@ -4,12 +4,16 @@ import StudentPackage.dao.StudentDao;
 import StudentPackage.dao.impl.StudentDaoImpl;
 import StudentPackage.model.Student;
 import StudentPackage.service.StudentService;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@Component
 public class StudentServiceImpl implements StudentService {
 
     private StudentDao studentDao;
@@ -24,43 +28,37 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
-    public boolean updatestudent(Student student){
-        boolean rawupdated = false;
+    public void updatestudent(Student student){
+
         try {
             studentDao = new StudentDaoImpl();
-            rawupdated = studentDao.updateStudent(student);
+            studentDao.updateStudent(student);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rawupdated;
+
     }
 
-    public boolean deletestudent(int id){
+    public void deletestudent(int id){
         boolean rawDeleted = false;
         try {
             studentDao = new StudentDaoImpl();
-            rawDeleted = studentDao.deleteStudent(id);
+            studentDao.deleteStudent(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rawDeleted;
+
     }
 
     public Student selectstudent(int id) {
         Student student = null;
-        ResultSet resultSet = null;
+
         try {
             studentDao = new StudentDaoImpl();
-            resultSet = studentDao.selectStudent(id);
-
-            while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                int age = resultSet.getInt("age");
-                String gender = resultSet.getString("gender");
-                student = new Student(id, name, age, gender);
-                System.out.println(student);
+            student = studentDao.selectStudent(id);
+            System.out.println(student);
             }
-        } catch (SQLException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return student;
@@ -68,18 +66,9 @@ public class StudentServiceImpl implements StudentService {
 
     public List<Student> selectallstudent(){
         List<Student> student = new ArrayList<>();
-        ResultSet resultSet = null;
         try {
             studentDao = new StudentDaoImpl();
-            resultSet = studentDao.selectAllStudents();
-
-            while (resultSet.next()){
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                int age = resultSet.getInt("age");
-                String gender = resultSet.getString("gender");
-                student.add(new Student(id, name, age, gender));
-            }
+            student = studentDao.selectAllStudents();
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -20,14 +20,14 @@ public class StudController {
 
     private StudentService studentService;
 
-    //how to add a default path in RequestMapping?
-    @RequestMapping("/")
+
+    @RequestMapping("/list")
     private ModelAndView listStudent(HttpServletRequest request, HttpServletResponse response)
     {
         studentService = new StudentServiceImpl();
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("studentlist.jsp");
+        mv.setViewName("studentlist");
         mv.addObject("liststudent" , liststudent);
         return mv;
     }
@@ -35,7 +35,7 @@ public class StudController {
     private ModelAndView showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("addnew.jsp");
+        mv.setViewName("addnew");
         return mv;
     }
 
@@ -45,7 +45,7 @@ public class StudController {
         int id = Integer.parseInt(request.getParameter("id"));
         Student existingStudent = studentService.selectstudent(id);
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("addnew.jsp");
+        mv.setViewName("addnew");
         mv.addObject("student" , existingStudent);
         return mv;
     }
@@ -60,7 +60,7 @@ public class StudController {
         studentService.insertStudent(newStudent);
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("studentlist.jsp");
+        mv.setViewName("studentlist");
         mv.addObject("liststudent" , liststudent);
         return mv;
     }
@@ -76,7 +76,7 @@ public class StudController {
         studentService.updatestudent(stud);
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("studentlist.jsp");
+        mv.setViewName("studentlist");
         mv.addObject("liststudent" , liststudent);
         return mv;
     }
@@ -87,7 +87,7 @@ public class StudController {
         studentService.deletestudent(id);
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("studentlist.jsp");
+        mv.setViewName("studentlist");
         mv.addObject("liststudent" , liststudent);
         return mv;
     }
