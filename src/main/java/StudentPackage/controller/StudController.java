@@ -1,4 +1,4 @@
-package StudentPackage.control;
+package StudentPackage.controller;
 
 
 import StudentPackage.model.Student;

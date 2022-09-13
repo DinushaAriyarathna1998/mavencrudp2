@@ -1,3 +1,6 @@
+package StudentPackage.config;
+
+import StudentPackage.config.MVCConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
