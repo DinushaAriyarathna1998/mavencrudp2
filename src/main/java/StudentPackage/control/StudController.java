@@ -18,16 +18,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
-public class StudController {
+public abstract class StudController {
 
     @Autowired
-    private StudentService studentService;
+    private StudentService studentService = new StudentServiceImpl();
 
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(value ="/list", method = RequestMethod.GET)
     private ModelAndView listStudent(HttpServletRequest request, HttpServletResponse response)
     {
-        studentService = new StudentServiceImpl();
+        studentService = new StudentServiceImpl(  );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("studentlist");
@@ -46,7 +46,6 @@ public class StudController {
     private ModelAndView showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        studentService = new StudentServiceImpl();
         Student existingStudent = studentService.selectstudent(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addnew");
@@ -62,7 +61,6 @@ public class StudController {
         String gender = request.getParameter("gender");
         Student newStudent = new Student(name, age, gender);
         System.out.println(newStudent);
-        studentService = new StudentServiceImpl();
         studentService.insertStudent(newStudent);
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
@@ -79,7 +77,6 @@ public class StudController {
         String gender = request.getParameter("gender");
 
         Student stud = new Student(id, name, age, gender);
-        studentService = new StudentServiceImpl();
         studentService.updatestudent(stud);
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();

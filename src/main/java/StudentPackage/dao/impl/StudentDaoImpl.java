@@ -10,17 +10,21 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 
 @Repository
 public class StudentDaoImpl implements StudentDao {
 
 
+
     @Autowired
     private SessionFactory sessionFactory;
 
 
+
     @Override
+    @Transactional
     public void insertStudent(Student student) {
 
         Session session = sessionFactory.getCurrentSession();
@@ -29,6 +33,7 @@ public class StudentDaoImpl implements StudentDao {
 
 
     @Override
+    @Transactional
     public void deleteStudent(int id){
         Session session = sessionFactory.getCurrentSession();
         Student stud = session.byId(Student.class).load(id);
@@ -38,6 +43,7 @@ public class StudentDaoImpl implements StudentDao {
 
 
     @Override
+    @Transactional
     public void updateStudent(Student student){
         Session session = sessionFactory.getCurrentSession();
         session.update(student);
@@ -46,6 +52,7 @@ public class StudentDaoImpl implements StudentDao {
 
 
     @Override
+    @Transactional
     public List selectAllStudents(){
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -57,6 +64,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    @Transactional
     public Student selectStudent(int id){
         Session session = sessionFactory.getCurrentSession();
         return session.load(Student.class, id );
