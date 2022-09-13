@@ -1,5 +1,3 @@
-package StudentPackage.config;
-
 import java.util.Properties;
 
 
