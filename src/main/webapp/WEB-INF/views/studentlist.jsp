@@ -6,14 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <html>
 <head>
     <title>User Management Application</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -38,20 +37,19 @@
         <c:forEach var="student" items="${liststudent}">
             <tr>
                 <td>
-                    <c:out value="${student.id}"/>
+                    <c:out value="${student.id}" />
                 </td>
                 <td>
-                    <c:out value="${student.name}"/>
+                    <c:out value="${student.name}" />
                 </td>
                 <td>
-                    <c:out value="${student.age}"/>
+                    <c:out value="${student.age}" />
                 </td>
                 <td>
-                    <c:out value="${student.gender}"/>
+                    <c:out value="${student.gender}" />
                 </td>
                 <td>
-                    <a href="edit?id=<c:out value='${student.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
-                        href="delete?id=<c:out value='${student.id}' />">Delete</a></td>
+                    <a href="edit?id=<c:out value='${student.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=<c:out value='${student.id}' />">Delete</a>                    </td>
             </tr>
         </c:forEach>
         </tbody>

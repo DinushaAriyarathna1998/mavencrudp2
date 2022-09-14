@@ -21,10 +21,10 @@
     <div class="card">
         <div class="card-body">
             <c:if test="${student != null}">
-            <form action="update" method="get">
+            <form action="update" method="post">
                 </c:if>
                 <c:if test="${student == null}">
-                <form action="insert" method="get">
+                <form action="insert" method="post">
                     </c:if>
 
                     <caption>
