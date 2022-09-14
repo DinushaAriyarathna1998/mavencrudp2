@@ -1,4 +1,4 @@
-package StudentPackage.dao;
+package com.dinusha.dao;
 
 
 import org.springframework.stereotype.Component;
@@ -46,7 +46,6 @@ public class StudentDBUtil {
         }
         return con;
     }
-
 
 
 }
