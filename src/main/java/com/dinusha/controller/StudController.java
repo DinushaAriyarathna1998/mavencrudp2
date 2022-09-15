@@ -40,7 +40,7 @@ public class StudController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listStudents(Model model) {
         model.addAttribute("liststudent", this.studentService.selectallstudent());
-        return "studentlist";
+        return "/studentlist.jsp";
     }
 
     /*@GetMapping("/list")
@@ -55,7 +55,7 @@ public class StudController {
     @RequestMapping(value = "/new")
     public ModelAndView showNewForm(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "addnew" );
+        mv.setViewName("/WEB-INF/addnew.jsp");
         return mv;
     }
 
@@ -80,7 +80,7 @@ public class StudController {
         studentService.insertStudent( newStudent );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "studentlist" );
+        mv.setViewName("/studentlist.jsp");
         mv.addObject( "liststudent", liststudent );
         return mv;
     }
