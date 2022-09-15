@@ -3,12 +3,11 @@ package com.dinusha.controller;
 
 import com.dinusha.model.Student;
 import com.dinusha.service.StudentService;
-import com.dinusha.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -21,19 +20,29 @@ import java.util.List;
 @Controller
 public class StudController {
 
+    private StudentService studentService;
+
     @Autowired
-    private StudentService studentService = new StudentServiceImpl();
-
-
-    @RequestMapping(value = "/list")
-    private ModelAndView listStudent(HttpServletRequest request, HttpServletResponse response) {
-        studentService = new StudentServiceImpl();
-        List<Student> liststudent = studentService.selectallstudent();
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName( "studentlist" );
-        mv.addObject( "liststudent", liststudent );
-        return mv;
+    public StudController(StudentService studentService) {
+        this.studentService = studentService;
     }
+
+//    @RequestMapping(value = "/list")
+//    public ModelAndView listStudent(HttpServletRequest request, HttpServletResponse response) {
+//
+//        List<Student> liststudent = studentService.selectallstudent();
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName( "studentlist" );
+//        mv.addObject( "liststudent", liststudent );
+//        return mv;
+//    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String listStudents(Model model) {
+        model.addAttribute("liststudent", this.studentService.selectallstudent());
+        return "studentlist";
+    }
+
     /*@GetMapping("/list")
     public String listStudent(Model theModel) {
         studentService = new StudentServiceImpl();
@@ -44,9 +53,9 @@ public class StudController {
 
 
     @RequestMapping(value = "/new")
-    private ModelAndView showNewForm(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView showNewForm(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/view/addnew" );
+        mv.setViewName( "addnew" );
         return mv;
     }
 
@@ -62,7 +71,7 @@ public class StudController {
     }
 
     @RequestMapping(value = "/insert")
-    private ModelAndView insertStudent(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView insertStudent(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter( "name" );
         int age = Integer.parseInt( request.getParameter( "age" ) );
         String gender = request.getParameter( "gender" );
@@ -77,7 +86,7 @@ public class StudController {
     }
 
     @RequestMapping("/update")
-    private ModelAndView updateStudent(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView updateStudent(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt( request.getParameter( "id" ) );
         String name = request.getParameter( "name" );
         int age = Integer.parseInt( request.getParameter( "age" ) );
@@ -87,18 +96,18 @@ public class StudController {
         studentService.updatestudent( stud );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/view/studentlist" );
+        mv.setViewName( "/WEB-INF/views/studentlist" );
         mv.addObject( "liststudent", liststudent );
         return mv;
     }
 
     @RequestMapping(value = "/delete")
-    private ModelAndView deleteStudent(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView deleteStudent(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt( request.getParameter( "id" ) );
         studentService.deletestudent( id );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/view/studentlist" );
+        mv.setViewName( "/WEB-INF/views/studentlist" );
         mv.addObject( "liststudent", liststudent );
         return mv;
     }

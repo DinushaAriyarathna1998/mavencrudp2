@@ -4,7 +4,6 @@ import com.dinusha.dao.StudentDao;
 import com.dinusha.model.Student;
 import com.dinusha.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +11,12 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    public StudentServiceImpl(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
 
     @Override
     public void insertStudent(Student student) {
