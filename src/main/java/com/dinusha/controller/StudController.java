@@ -40,7 +40,7 @@ public class StudController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listStudents(Model model) {
         model.addAttribute("liststudent", this.studentService.selectallstudent());
-        return "/studentlist.jsp";
+        return "/studentlist";
     }
 
     /*@GetMapping("/list")
@@ -55,7 +55,7 @@ public class StudController {
     @RequestMapping(value = "/new")
     public ModelAndView showNewForm(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/WEB-INF/addnew.jsp");
+        mv.setViewName("/addnew");
         return mv;
     }
 
@@ -65,7 +65,7 @@ public class StudController {
         int id = Integer.parseInt( request.getParameter( "id" ) );
         Student existingStudent = studentService.selectstudent( id );
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/views/addnew" );
+        mv.setViewName( "/addnew" );
         mv.addObject( "student", existingStudent );
         return mv;
     }
@@ -80,7 +80,7 @@ public class StudController {
         studentService.insertStudent( newStudent );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("/studentlist.jsp");
+        mv.setViewName("/studentlist");
         mv.addObject( "liststudent", liststudent );
         return mv;
     }
@@ -96,7 +96,7 @@ public class StudController {
         studentService.updatestudent( stud );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/views/studentlist" );
+        mv.setViewName( "studentlist" );
         mv.addObject( "liststudent", liststudent );
         return mv;
     }
@@ -107,7 +107,7 @@ public class StudController {
         studentService.deletestudent( id );
         List<Student> liststudent = studentService.selectallstudent();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName( "/WEB-INF/views/studentlist" );
+        mv.setViewName( "studentlist" );
         mv.addObject( "liststudent", liststudent );
         return mv;
     }
